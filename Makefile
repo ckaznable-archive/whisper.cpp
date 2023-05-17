@@ -74,15 +74,7 @@ ifeq ($(UNAME_M),$(filter $(UNAME_M),x86_64 i686))
 		ifneq (,$(findstring AVX1.0,$(AVX1_M)))
 			CFLAGS += -mavx
 		endif
-		AVX2_M := $(shell sysctl machdep.cpu.leaf7_features)
-		ifneq (,$(findstring AVX2,$(AVX2_M)))
-			CFLAGS += -mavx2
-		endif
 	else ifeq ($(UNAME_S),Linux)
-		AVX2_M := $(shell grep "avx2 " /proc/cpuinfo)
-		ifneq (,$(findstring avx2,$(AVX2_M)))
-			CFLAGS += -mavx2
-		endif
 		FMA_M := $(shell grep "fma " /proc/cpuinfo)
 		ifneq (,$(findstring fma,$(FMA_M)))
 			CFLAGS += -mfma
@@ -101,10 +93,6 @@ ifeq ($(UNAME_M),$(filter $(UNAME_M),x86_64 i686))
 			CFLAGS += -msse3
 		endif
 	else ifeq ($(UNAME_S),Haiku)
-		AVX2_M := $(shell sysinfo -cpu | grep "AVX2 ")
-		ifneq (,$(findstring avx2,$(AVX2_M)))
-			CFLAGS += -mavx2
-		endif
 		FMA_M := $(shell sysinfo -cpu | grep "FMA ")
 		ifneq (,$(findstring fma,$(FMA_M)))
 			CFLAGS += -mfma
@@ -119,11 +107,11 @@ ifeq ($(UNAME_M),$(filter $(UNAME_M),x86_64 i686))
 			endif
 		endif
 	else
-		CFLAGS += -mfma -mf16c -mavx -mavx2
+		CFLAGS += -mfma -mf16c -mavx
 	endif
 endif
 ifeq ($(UNAME_M),amd64)
-	CFLAGS += -mavx -mavx2 -mfma -mf16c
+	CFLAGS += -mavx -mfma -mf16c
 endif
 
 ifneq ($(filter ppc64%,$(UNAME_M)),)
