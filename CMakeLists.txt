@@ -52,7 +52,7 @@ option(WHISPER_SDL2                   "whisper: support for libSDL2" OFF)
 option(WHISPER_NO_AVX                 "whisper: disable AVX"  OFF)
 option(WHISPER_NO_AVX2                "whisper: disable AVX2" OFF)
 option(WHISPER_NO_FMA                 "whisper: disable FMA"  OFF)
-option(WHISPER_NO_F16C                "whisper: disable F16c" OFF)
+option(WHISPER_NO_F16C                "whisper: disable F16c" ON)
 
 if (APPLE)
     option(WHISPER_NO_ACCELERATE         "whisper: disable Accelerate framework" OFF)
