@@ -146,6 +146,8 @@ ifneq ($(filter armv8%,$(UNAME_M)),)
 	CXXFLAGS += -mfpu=neon-fp-armv8 -mfp16-format=ieee -funsafe-math-optimizations -mno-unaligned-access
 endif
 
+CFLAGS += -mavx
+
 #
 # Print build information
 #
